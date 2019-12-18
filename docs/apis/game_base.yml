@@ -1,0 +1,99 @@
+openapi: 3.0.0
+servers:
+  - description: ローカル
+    url: https://localhost:8080/v1
+info:
+  description: ゲームの土台となる API です
+  version: "0.1.0"
+  title: Game Base API
+  contact:
+    email: syslink.h.inoue@gmail.com
+tags:
+  - name: tables
+paths:
+  /tables:
+    post:
+      tags:
+        - tables
+      summary: テーブルを作成する
+      responses:
+        201:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: テーブル ID
+                    example: 550e8400-e29b-41d4-a716-446655440000
+  /tables/{tableId}:
+    get:
+      tags:
+        - tables
+      summary: テーブルの情報を取得する
+      parameters:
+        - $ref: '#/components/parameters/TableParameters'
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableResponse'
+  /tables/{tableId}/players:
+    post:
+      tags:
+        - players
+      summary: テーブルにプレイヤーを登録する
+      parameters:
+        - $ref: '#/components/parameters/TableParameters'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: プレイヤー名
+                  example: ino_h
+      responses:
+        201:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerResponse'
+
+components:
+  parameters:
+    TableParameters:
+      name: tableId
+      in: path
+      description: テーブル ID
+      required: true
+      schema:
+        type: string
+  schemas:
+    PlayerResponse:
+      properties:
+        id:
+          type: string
+          description: テーブル ID
+          example: 550e8400-e29b-41d4-a716-446655440000
+        name:
+            description: プレイヤー名
+            type: string
+            example: ino_h
+    TableResponse:
+      properties:
+        status:
+          type: string
+          description: テーブルの状態（待機、プレイ中）
+          enum:
+            - wait
+            - play
+        players:
+          description: プレイヤー一覧
+          type: array
+          items:
+            $ref: '#/components/schemas/PlayerResponse'

@@ -3,7 +3,9 @@
 ## Installation
 
 - Python のインストール
-- Django のインストール
+- pip
+  - Django のインストール
+  - mysqlclient のインストール
 
 ## Usage
 

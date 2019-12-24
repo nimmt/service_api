@@ -1,0 +1,6 @@
+@url = http://localhost:8000
+
+### テーブル作成
+# @name create-table
+
+POST {{url}}/tables

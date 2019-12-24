@@ -1,0 +1,24 @@
+@startuml
+
+entity "tables" {
+  + id: varchar
+}
+
+entity "players" {
+  + id: varchar
+  --
+  name: varchar
+}
+
+entity "authentications" {
+  + id: varchar
+  --
+  # tableId: varchar
+  # playerId: varchar
+  playerName: varchar
+}
+
+tables o-ri-|| authentications
+authentications ||-ri-o players
+
+@enduml

@@ -1,6 +1,17 @@
 @url = http://localhost:8000
+@tableId = f987eabc-defa-4bb1-a837-ed527254984e
 
 ### テーブル作成
 # @name create-table
 
 POST {{url}}/tables
+
+### プレイヤー登録
+# @name create-players
+
+POST {{url}}/tables/{{tableId}}/players
+Content-Type: application/json
+
+{
+  "name": "ino_h"
+}

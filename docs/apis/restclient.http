@@ -6,6 +6,11 @@
 
 POST {{url}}/tables
 
+### テーブル情報取得
+# @name get-table
+
+GET {{url}}/tables/{{tableId}}
+
 ### プレイヤー登録
 # @name create-players
 

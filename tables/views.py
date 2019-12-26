@@ -12,6 +12,16 @@ def create(request):
 
     return JsonResponse({'id': table.id}, status=201)
 
+def show(request, tableId):
+    table = Table.objects.get(id=tableId)
+
+    players = Player.objects.filter(table=table)
+
+    return JsonResponse({
+      'id': table.id,
+      'players': [{'id': player.id, 'name': player.name} for player in players]
+    })
+
 def create_player(request, tableId):
     table = Table.objects.get(id=tableId)
 

@@ -74,14 +74,25 @@ WSGI_APPLICATION = 'service_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# DATABASES = {
+#      'default': {
+#          'ENGINE': 'django.db.backends.mysql',
+#          'NAME': 'service_api_development',
+#          'USER': 'root',
+#          'PASSWORD': 'password',
+#          'HOST': '127.0.0.1',
+#          'PORT': '3306'
+#      }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'service_api_development',
-        'USER': 'root',
+        'USER': 'postgres',
         'PASSWORD': 'password',
         'HOST': '127.0.0.1',
-        'PORT': '3306'
+        'PORT': '5432'
     }
 }
 

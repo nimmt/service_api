@@ -1,16 +1,26 @@
 version: '3'
 
 services:
+  # db:
+  #   image: mysql
+  #   command: --default-authentication-plugin=mysql_native_password
+  #   volumes:
+  #     - db_data:/var/lib/mysql
+  #   restart: always
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: password
+  #   ports:
+  #   - 3306:3306
   db:
-    image: mysql
-    command: --default-authentication-plugin=mysql_native_password
+    image: postgres
     volumes:
-      - db_data:/var/lib/mysql
+      - db_data:/docker-entrypoint-initdb.d
     restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: password
     ports:
-    - 3306:3306
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: service_api_development
   swagger:
     image: swaggerapi/swagger-ui
     ports:

@@ -12,9 +12,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
-import django_heroku
-django_heroku.settings(locals())
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -88,16 +85,21 @@ WSGI_APPLICATION = 'service_api.wsgi.application'
 #      }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'service_api_development',
-        'USER': 'postgres',
-        'PASSWORD': 'password',
-        'HOST': '127.0.0.1',
-        'PORT': '5432'
+if os.environ.get('APP_ENV') == 'production':
+    import django_heroku
+
+    django_heroku.settings(locals())
+else:
+    DATABASES ={
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'service_api_development',
+            'USER': 'postgres',
+            'PASSWORD': 'password',
+            'HOST': '127.0.0.1',
+            'PORT': '5432'
+        }
     }
-}
 
 
 # Password validation

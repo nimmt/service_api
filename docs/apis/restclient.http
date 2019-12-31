@@ -1,6 +1,7 @@
-# @url = http://localhost:8000
-@url = https://table-games.herokuapp.com
-@tableId = 981da4cf-cee6-44cc-9f0a-cf04aeefafb2
+@url = http://localhost:8000
+@tableId = ab1f32d5-9806-4e54-b18a-1f60186e548a
+# @url = https://table-games.herokuapp.com
+# @tableId = 9d294370-06a1-4be3-a812-25cd39259941
 
 ### テーブル作成
 # @name create-table

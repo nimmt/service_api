@@ -15,28 +15,21 @@ nimmt --> user: テーブル ID
 
 loop poling
   user -> nimmt: テーブル情報を取得する
-  nimmt --> user: テーブル情報 (並んでいるカード, ステータス)
-
-  ref over user
-    ステータスに従い処理
-  end ref
+  nimmt --> user: テーブル情報 (プレイヤー情報), ステータス)
 end
 
 loop プレイヤー数
   user -> nimmt: 参加する (テーブル ID)
   nimmt -->> notice: JoinPlayer
-  nimmt --> user: アクセストークン（テーブル ID、手札カード）
+  nimmt --> user: アクセストークン（テーブル ID）
 end
 
-user -> nimmt: プレイヤー情報を取得する
-nimmt --> user: プレイヤー情報
+== 進行フェーズ ==
 
 user -> nimmt: ゲーム開始
 nimmt -> nimmt: カードを 4 枚テーブルに並べる
 nimmt -->> notice: LineUpCards
 nimmt -> nimmt: ステータス：Selecting
-
-== 進行フェーズ ==
 
 loop プレイヤー数
   user -> nimmt: カードを選ぶ (数字)

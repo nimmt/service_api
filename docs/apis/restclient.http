@@ -2,6 +2,7 @@
 @tableId = ab1f32d5-9806-4e54-b18a-1f60186e548a
 # @url = https://table-games.herokuapp.com
 # @tableId = 9d294370-06a1-4be3-a812-25cd39259941
+@accessToken = a65c921c-73a6-4ebe-bb90-5687abfe625a
 
 ### テーブル作成
 # @name create-table
@@ -22,3 +23,10 @@ Content-Type: application/json
 {
   "name": "ino_h"
 }
+
+### 自身情報
+# @name create-players
+
+GET {{url}}/tables/{{tableId}}/me
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}

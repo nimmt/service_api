@@ -17,10 +17,18 @@ services:
       - db_data:/docker-entrypoint-initdb.d
     restart: always
     ports:
-      - 5432:5432
+      - 8432:5432
     environment:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: service_api_development
+  redis:
+    image: 'bitnami/redis:latest'
+    volumes:
+      - redis_data:/bitnami/redis/data
+    ports:
+      - 8379:6379
+    environment:
+        - ALLOW_EMPTY_PASSWORD=yes
   swagger:
     image: swaggerapi/swagger-ui
     ports:
@@ -31,3 +39,4 @@ services:
       - ./docs/apis:/usr/share/nginx/html/api
 volumes:
   db_data:
+  redis_data:

@@ -53,12 +53,27 @@ paths:
             schema:
               type: object
               properties:
-                name:
+                accessToken:
                   type: string
-                  description: プレイヤー名
-                  example: ino_h
+                  description: アクセストークン
+                  example: d62a5b9c-75df-4263-a652-e4bf1f1d4ea2
       responses:
         201:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerResponse'
+  /tables/{tableId}/me:
+    get:
+      tags:
+        - players
+      summary: 自分の情報を取得する
+      parameters:
+        - $ref: '#/components/parameters/TableParameters'
+      security:
+        - PlayerAccessToken: []
+      responses:
+        200:
           content:
             application/json:
               schema:
@@ -97,3 +112,8 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PlayerResponse'
+  securitySchemes:
+    PlayerAccessToken:
+      type: http
+      scheme: Bearer
+      description: プレイヤーのアクセストークン

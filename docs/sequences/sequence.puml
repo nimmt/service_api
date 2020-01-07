@@ -16,12 +16,15 @@ nimmt --> user: テーブル ID
 loop poling
   user -> nimmt: テーブル情報を取得する
   nimmt --> user: テーブル情報 (プレイヤー情報), ステータス)
+  note right
+  TODO: ポーリングするのはイベント情報を使用する
+  end note
 end
 
 loop プレイヤー数
   user -> nimmt: 参加する (テーブル ID)
   nimmt -->> notice: JoinPlayer
-  nimmt --> user: アクセストークン（テーブル ID）
+  nimmt --> user: アクセストークン
 end
 
 == 進行フェーズ ==

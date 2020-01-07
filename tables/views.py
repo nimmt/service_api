@@ -1,5 +1,6 @@
 import uuid
 import json
+from django.core.cache import cache
 from django.shortcuts import render
 from django.http.response import JsonResponse
 
@@ -27,8 +28,16 @@ def create_player(request, tableId):
 
     body = json.loads(request.body)
 
-    player = Player(id=uuid.uuid4(), table=table, name=body['name'])
+    player = Player(id=str(uuid.uuid4()), table=table, name=body['name'])
 
     player.save()
 
-    return JsonResponse({'id': player.id, 'name': player.name})
+    access_token = str(uuid.uuid4())
+
+    cache.set(
+      '/player_essions/{}'.format(access_token),
+      player,
+      timeout = 24*60*60
+    )
+
+    return JsonResponse({'accessToken': access_token}, status=201)

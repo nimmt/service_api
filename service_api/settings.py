@@ -91,6 +91,13 @@ if os.environ.get('APP_ENV') == 'production':
     import django_heroku
 
     django_heroku.settings(locals())
+
+    CACHES = {
+        'default': {
+            'BACKEND': 'redis_cache.RedisCache',
+            'LOCATION': os.environ.get('REDIS_URL'),
+        },
+    }
 else:
     DATABASES ={
         'default': {
@@ -99,10 +106,16 @@ else:
             'USER': 'postgres',
             'PASSWORD': 'password',
             'HOST': '127.0.0.1',
-            'PORT': '5432'
+            'PORT': '8432'
         }
     }
 
+    CACHES = {
+        'default': {
+            'BACKEND': 'redis_cache.RedisCache',
+            'LOCATION': 'redis://127.0.0.1:8379/0',
+        },
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
